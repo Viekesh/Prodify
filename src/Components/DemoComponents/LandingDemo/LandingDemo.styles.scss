@@ -1,0 +1,25 @@
+.categories {
+    background-color: darkblue;
+    margin: 3px auto;
+    width: 90vw;
+
+    .category {
+        background-color: crimson;
+        margin: 9px auto;
+        padding: 9px;
+
+        .background_img {
+            height: 45vh;
+            background-position: center;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
+        .category_body {
+            background-color: darkgreen;
+            margin: 9px auto;
+            padding: 9px;
+            text-transform: capitalize;
+        }
+    }
+}

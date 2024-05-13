@@ -1,5 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Landing from "../Components/Landing/Landing";
+import LandingDemo from "../Components/DemoComponents/LandingDemo/LandingDemo";
 
 
 
@@ -10,6 +11,10 @@ const ReactRouterDOM = () => {
         {
             path: "/",
             element: <Landing />
+        },
+        {
+            path: "/LandingDemo",
+            element: <LandingDemo />
         },
     ]);
 
