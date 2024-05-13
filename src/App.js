@@ -1,4 +1,6 @@
-import ReactRouterDOM from "./ReactRouterDOM/ReactRouter";
+// import ReactRouterDOM from "./ReactRouterDOM/ReactRouter";
+
+import RRD from "./Components/DemoComponents/RRD/RRD";
 
 
 
@@ -6,7 +8,8 @@ import ReactRouterDOM from "./ReactRouterDOM/ReactRouter";
 const App = () => {
     return (
         <>
-            <ReactRouterDOM />
+            {/* <ReactRouterDOM /> */}
+            <RRD />
         </>
     )
 }
