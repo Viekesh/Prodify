@@ -1,0 +1,85 @@
+.for_mob.top_nav {
+    border: 3px solid transparent;
+    width: 100vw;
+    height: 9vh;
+    position: fixed;
+    background-color: pink;
+    z-index: 999;
+}
+
+.nav_elements {
+    border: 3px solid transparent;
+    width: 80%;
+    justify-content: space-between;
+}
+
+.logo {
+    border: 3px solid transparent;
+    width: 120px;
+}
+
+.logo>img {
+    width: 100%;
+}
+
+button {
+    border-radius: 6px;
+    padding: 3px 9px;
+    background-color: black;
+    color: snow;
+    text-transform: uppercase;
+    font-family: "Kanit", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.navigation_links {
+    border: 0px solid transparent;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 998 !important;
+
+    transform: translateX(-100%);
+    transition: 0.1s;
+    /* transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55); */
+
+    z-index: 4;
+}
+
+.nav_link {
+    border: 1px solid black;
+    width: 50%;
+    height: 80vh;
+}
+
+.links_container {
+    border: 1px solid transparent;
+}
+
+.link_options {
+    border: 1px solid black;
+    margin: 3px 0;
+    padding: 6px;
+    height: 6vh;
+    text-transform: uppercase;
+    font-family: "Kanit", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.navigation_links.navigation_overlay {
+    transform: translateX(0%);
+}
+
+.box_overlay {
+    border: 0px solid transparent;
+    width: 50%;
+    height: 100%;
+
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(4px);
+}

@@ -1,6 +1,7 @@
-// import ReactRouterDOM from "./ReactRouterDOM/ReactRouter";
+import "./App.css";
+import ReactRouterDOM from "./ReactRouterDOM/ReactRouter";
 
-import RRD from "./Components/DemoComponents/RRD/RRD";
+// import RRD from "./Components/DemoComponents/RRD/RRD";
 
 
 
@@ -8,8 +9,8 @@ import RRD from "./Components/DemoComponents/RRD/RRD";
 const App = () => {
     return (
         <>
-            {/* <ReactRouterDOM /> */}
-            <RRD />
+            <ReactRouterDOM />
+            {/* <RRD /> */}
         </>
     )
 }

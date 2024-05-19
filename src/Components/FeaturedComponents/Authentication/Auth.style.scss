@@ -1,0 +1,14 @@
+.log_with_google {
+    border: 3px solid black;
+    margin: 12vh 0;
+    height: 12vh;
+    display: none;
+}
+
+
+
+@media only screen and (min-width: 768px) {
+    .log_with_google {
+        display: block;
+    }
+}
