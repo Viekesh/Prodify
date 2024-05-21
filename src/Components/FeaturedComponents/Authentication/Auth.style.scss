@@ -1,4 +1,10 @@
-.log_with_google {
+.for_mob {
+    border: 3px solid black;
+    margin: 12vh 0;
+    height: 12vh;
+}
+
+.for_desk {
     border: 3px solid black;
     margin: 12vh 0;
     height: 12vh;
@@ -8,7 +14,11 @@
 
 
 @media only screen and (min-width: 768px) {
-    .log_with_google {
+    .for_desk {
         display: block;
+    }
+
+    .for_mob {
+        display: none;
     }
 }

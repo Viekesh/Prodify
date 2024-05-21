@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { doc, getDoc, getFirestore, serverTimestamp, setDoc } from "firebase/firestore";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -27,7 +27,9 @@ export const analytics = getAnalytics(app);
 
 export const database = getFirestore();
 
-export const createUserDocFromAuth = async (userAuth) => {
+export const createUserDocFromAuth = async (userAuth, additionalInformation) => {
+
+    if (!userAuth) return;
 
     const userDocRef = doc(database, "Prodify Users", userAuth.uid);
 
@@ -59,5 +61,16 @@ export const createUserDocFromAuth = async (userAuth) => {
     };
 
     return userDocRef;
-
 }
+
+
+
+export const signUpWithEmailAndPass = async (email, password) => {
+    if (!email || !password) return;
+
+    createUserWithEmailAndPassword(authInitialise, email, password);
+};
+
+
+
+//.

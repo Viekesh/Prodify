@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
-import { authInitialise, createUserDocFromAuth, database } from '../../../FirebaseConfiguration';
-import { doc, getDoc, serverTimestamp, setDoc } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
+import { signInWithPopup, GoogleAuthProvider, signInWithRedirect, getRedirectResult } from 'firebase/auth';
+import { authInitialise, createUserDocFromAuth } from '../../../FirebaseConfiguration';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
@@ -9,26 +8,31 @@ import { useLocation, useNavigate } from 'react-router-dom';
 const GoogleSignInButton = () => {
 
     const navigateAfterSignInWithGoogle = useNavigate();
+
     const location = useLocation();
 
     // State to manage errors
     const [authError, setAuthError] = useState(null);
 
+    // use here empty array to run this function once when this function mounts for the first time.
+
     const handleGoogleSignIn = async () => {
 
         try {
             const auth = authInitialise;
+
             const provider = new GoogleAuthProvider();
+
             const result = await signInWithPopup(auth, provider);
 
             const { user } = result;
 
-            const userDocRef = await createUserDocFromAuth(user);
+            await createUserDocFromAuth(user);
 
             // Handle successful authentication
-            const credential = GoogleAuthProvider.credentialFromResult(result);
+            // const credential = GoogleAuthProvider.credentialFromResult(result);
 
-            const token = credential.accessToken;
+            // const token = credential.accessToken;
 
             // console.log("token :", token);
 
@@ -62,7 +66,7 @@ const GoogleSignInButton = () => {
             <p>Sign {location.pathname === "/Authenticate" ? "up" : "in"} with </p>
 
             <button onClick={handleGoogleSignIn} className='for_desk log_with_google'>
-                Sign in with Google
+                Sign in Desk Google
             </button>
         </>
     );
@@ -74,21 +78,4 @@ export default GoogleSignInButton;
 
 
 
-
-
-// setting up user's documents
-// const createUserDocFromAuth = async (userAuth) => {
-//     const userDocRef = doc(database, "Prodify Users", userAuth.uid);
-
-//     console.log(userDocRef);
-
-//     const userSnapShot = await getDoc(userDocRef);
-
-//     console.log("user snapshot : ", userSnapShot);
-// };
-
-// const docReference = createUserDocFromAuth(user);
-
-// console.log("docReference :", docReference);
-
-// console.log("docReference :", docReference.exist());
+//.
