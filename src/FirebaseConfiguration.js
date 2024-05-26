@@ -27,7 +27,10 @@ export const analytics = getAnalytics(app);
 
 export const database = getFirestore();
 
-export const createUserDocFromAuth = async (userAuth, additionalInformation) => {
+
+
+// Authentication
+export const createUserDocFromAuth = async (userAuth) => {
 
     if (!userAuth) return;
 
@@ -45,7 +48,11 @@ export const createUserDocFromAuth = async (userAuth, additionalInformation) => 
 
         try {
             await setDoc(userDocRef, {
-                photoURL, displayName, email, phoneNumber, createdAt
+                photoURL,
+                displayName,
+                email,
+                phoneNumber,
+                createdAt,
             });
         } catch (error) {
             console.log("Error Occured While Creating The User", error.message);
@@ -62,14 +69,6 @@ export const createUserDocFromAuth = async (userAuth, additionalInformation) => 
 
     return userDocRef;
 }
-
-
-
-export const signUpWithEmailAndPass = async (email, password) => {
-    if (!email || !password) return;
-
-    createUserWithEmailAndPassword(authInitialise, email, password);
-};
 
 
 

@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { signInWithPopup, GoogleAuthProvider, signInWithRedirect, getRedirectResult } from 'firebase/auth';
+import React, { useState } from 'react';
+import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { authInitialise, createUserDocFromAuth } from '../../../FirebaseConfiguration';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { FcGoogle } from "react-icons/fc";
 
 
 
@@ -15,7 +16,6 @@ const GoogleSignInButton = () => {
     const [authError, setAuthError] = useState(null);
 
     // use here empty array to run this function once when this function mounts for the first time.
-
     const handleGoogleSignIn = async () => {
 
         try {
@@ -61,13 +61,17 @@ const GoogleSignInButton = () => {
 
     return (
         <>
-            {authError && <p>Error: {authError.message}</p>}
+            <section className="for_desk">
+                {authError && <p>Error: {authError.message}</p>}
 
-            <p>Sign {location.pathname === "/Authenticate" ? "up" : "in"} with </p>
+                <p>Sign {location.pathname === "/Authenticate" ? "up" : "in"} with </p>
 
-            <button onClick={handleGoogleSignIn} className='for_desk log_with_google'>
-                Sign in Desk Google
-            </button>
+                <button onClick={handleGoogleSignIn} className='log_with_google'>
+                    <div className="for_andi x_y_axis_center">
+                        <FcGoogle />
+                    </div>
+                </button>
+            </section>
         </>
     );
 };

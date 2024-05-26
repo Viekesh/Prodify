@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { authInitialise } from '../../../FirebaseConfiguration';
 import { GoogleAuthProvider, getRedirectResult, signInWithRedirect } from 'firebase/auth';
+import { FcGoogle } from "react-icons/fc";
 
 
 
 const GAuthMob = () => {
 
     const [authState, setAuthState] = useState(null); // Track authentication state
+
     const auth = authInitialise; // Initialize Firebase Auth instance
 
     useEffect(() => {
@@ -26,6 +28,7 @@ const GAuthMob = () => {
         };
 
         handleRedirectResult(); // Call the function on component mount
+
     }, [auth]); // Re-run useEffect only when auth changes
 
     const handleSignIn = async () => {
@@ -38,17 +41,23 @@ const GAuthMob = () => {
     };
 
     return (
-        <div>
+        <>
             {authState ? (
                 // User is signed in
                 <div>
                     Welcome, {authState.displayName}!
                 </div>
             ) : (
-                // User is not signed in
-                <button onClick={handleSignIn}>Sign in with Google</button>
+                // if user is not signed in
+                <>
+                    <div onClick={handleSignIn} className='sign_in_methods'>
+                        <span className="g_auth x_y_axis_center">
+                            <FcGoogle />
+                        </span>
+                    </div>
+                </>
             )}
-        </div>
+        </>
     );
 }
 

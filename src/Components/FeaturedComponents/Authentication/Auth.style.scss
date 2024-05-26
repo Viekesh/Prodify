@@ -13,6 +13,138 @@
 
 
 
+// Authentication
+.authenticate {
+    margin: 15vh auto;
+}
+
+.authenticate .form_fields {
+    margin: 0 auto;
+    width: 80%;
+}
+
+.authenticate .form_fields p {
+    font-family: "Kanit", sans-serif;
+    font-size: 15px;
+    text-transform: capitalize;
+}
+
+
+
+// Authentication Form Elements
+.authenticate form .form_elements {
+    border: 1px solid gray;
+    border-radius: 9px;
+    margin: 9px auto;
+    padding: 12px;
+    font-size: 15px;
+    font-family: "Kanit", sans-serif;
+}
+
+.authenticate form .form_sub_btn {
+    border: 1px solid gray;
+    border-radius: 9px;
+    margin: 9px auto;
+    padding: 9px;
+    width: 100%;
+    font-size: 15px;
+    font-family: "Kanit", sans-serif;
+    background-color: lightslategray;
+}
+
+
+
+// GAuth
+
+.sign_in_methods {
+    margin: 6px auto;
+    width: 80%;
+}
+
+.sign_in_methods p {
+    font-family: "Kanit", sans-serif;
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
+.sign_in_methods .g_auth {
+    border: 1px solid transparent;
+    border-radius: 50%;
+    width: 45px;
+    background-color: lightgray;
+    box-shadow: 3px 1px 6px gray;
+}
+
+.sign_in_methods .g_auth svg {
+    font-size: 45px;
+}
+
+
+
+// Profile
+
+.user_info {
+    // border: 3px solid gray;
+    margin: 9vh auto 0 auto;
+    padding: 54px 0 36px 0;
+    width: 80%;
+}
+
+.user_info .user_name input {
+    font-family: "Kanit", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.user_info .user_details {
+    border: 1px solid gray;
+    border-radius: 18px;
+    margin: 30px auto 0 auto;
+    padding: 6px;
+    justify-content: space-between;
+}
+
+.user_info .user_details .btn {
+    border: 3px solid lightgray;
+    border-radius: 50%;
+    padding: 6px;
+    width: 60px;
+    height: 60px;
+    font-family: "Kanit", sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    text-align: center;
+    text-transform: uppercase;
+    color: black;
+    background-color: lightgrey;
+}
+
+.users_prop_data {
+    border: 3px solid gray;
+    margin: 33px auto;
+    width: 100%;
+    height: 72vh;
+
+    overflow-y: scroll;
+    position: relative;
+}
+
+.users_prop_data .prop_head {
+    border: 3px solid gray;
+    width: 100%;
+    height: 6vh;
+}
+
+.users_prop_data h2 {
+    margin: 0 auto;
+    width: 80%;
+    font-family: "Kanit", sans-serif;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+
+
 @media only screen and (min-width: 768px) {
     .for_desk {
         display: block;

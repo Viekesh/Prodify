@@ -3,7 +3,12 @@ import "./Auth.style.scss";
 import GoogleSignInButton from "./GAuth";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
-import { signUpWithEmailAndPass } from "../../../FirebaseConfiguration";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { authInitialise, database } from "../../../FirebaseConfiguration";
+import { doc, setDoc } from "firebase/firestore";
+import TopNav from "../Navigation/TopNav.component";
+import GAuthMob from "./GAuthMob";
+
 
 
 const defaultFormFields = {
@@ -36,84 +41,84 @@ const Register = () => {
     const userNavigateAfterSignUp = useNavigate();
 
     const handleFormData = (event) => {
-        // console.log(event.target.value);
+        console.log(event.target.value);
 
-        // setFormFields((prevState) => ({
-        //     ...prevState,
+        setFormFields((prevState) => ({
+            ...prevState,
 
-        //     [event.target.id]: event.target.value,
-        // }));
-
-        const { name, value } = event.target;
-
-        setFormFields({ ...formFields, [name]: value });
+            [event.target.id]: event.target.value,
+        }));
     };
 
     console.log(formFields);
 
-    // const submitFormData = async (event) => {
-    //     event.preventDefault();
 
-    //     try {
-    //         if (password !== confirmPass) {
-    //             return alert("Password Not Matched");
-    //         };
 
-    //         if (firstName, lastName, email, phoneNum, password, confirmPass) {
-    //             const userCredential = await createUserWithEmailAndPassword(
-    //                 authInitialise,
-    //                 email,
-    //                 password,
-    //             );
-    //             await updateProfile(authInitialise.currentUser, {
-    //                 displayName: `${firstName} ${lastName}`
-    //             });
+    const submitFormData = async (event) => {
+        event.preventDefault();
 
-    //             const user = userCredential.user;
-
-    //             const formDataCopy = { ...formFields };
-
-    //             delete formDataCopy.password;
-
-    //             delete formDataCopy.confirmPass;
-
-    //             await setDoc(doc(database, "Prodify Users", user.uid), {
-    //                 ...formDataCopy,
-    //             });
-
-    //             alert("You Have Successfully Registered!");
-
-    //             userNavigateAfterSignUp("/Authenticate");
-    //         } else {
-    //             return alert("All fields are mandatory");
-    //         };
-
-    //     } catch (error) {
-
-    //         console.log(error.message);
-
-    //     };
-    // };
-
-    const submitFormData = async () => {
-
-        if (password !== confirmPass) {
-            alert("Password do not match");
-        };
+        const createdAt = new Date();
 
         try {
-            const response = await signUpWithEmailAndPass(email, password);
+            if (password !== confirmPass) {
+                return alert("Password Not Matched");
+            };
 
-            console.log(response);
+            if (firstName && lastName && email && phoneNum && password && confirmPass) {
+                const userCredential = await createUserWithEmailAndPassword(
+                    authInitialise,
+                    email,
+                    password,
+                );
+
+                await updateProfile(authInitialise.currentUser, {
+                    displayName: `${firstName} ${lastName}`
+                });
+
+                const user = userCredential.user;
+
+                const formDataCopy = { ...formFields, createdAt };
+
+                // delete formDataCopy.password;
+
+                // delete formDataCopy.confirmPass;
+
+                await setDoc(doc(database, "Prodify Users", user.uid), {
+                    ...formDataCopy,
+                });
+
+                alert("You Have Successfully Registered!");
+
+                userNavigateAfterSignUp("/Profile");
+
+            } else {
+                return alert("All fields are mandatory");
+            };
+
         } catch (error) {
+
+            if (error.message === "Firebase: Password should be at least 6 characters (auth/weak-password).") {
+                alert("Password should be atleast 6 characters.");
+            };
+
+            if (error.message === "Firebase: Error (auth/invalid-email).") {
+                alert("Invalid Email Address.");
+            };
+
+            if (error.message === "Firebase: Error (auth/email-already-in-use).") {
+                alert("Email Address Already In Use.");
+            };
 
             console.log(error.message);
 
-        }
+        };
     };
+
+
 
     return (
         <>
+            <TopNav />
             <section className="authenticate">
 
                 <div className="form_fields">
@@ -220,13 +225,14 @@ const Register = () => {
                             }
                         </div>
 
-                        <div className="form_elements form_sub_button">
-                            <button type="submit" className="input_field">Register</button>
-                        </div>
+                        <button type="submit" className="form_sub_btn">Register</button>
+
                     </form>
+                    <p>sign in with other methods</p>
                 </div>
 
                 <GoogleSignInButton />
+                <GAuthMob />
             </section>
         </>
     );
