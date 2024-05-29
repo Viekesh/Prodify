@@ -1,3 +1,4 @@
+import TopNav from "../FeaturedComponents/Navigation/TopNav.component";
 
 
 
@@ -5,7 +6,9 @@
 const Landing = () => {
     return (
         <>
-            <header>landing</header>
+            <header>
+                <TopNav />
+            </header>
             <main></main>
             <footer></footer>
         </>

@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import "./Auth.style.scss";
 import GoogleSignInButton from "./GAuth";
 import GAuthMob from "./GAuthMob";
+import TopNav from "../Navigation/TopNav.component";
 
 
 
@@ -9,6 +10,7 @@ const Authenticate = () => {
 
     return (
         <>
+            <TopNav />
             <section className="authenticate">
 
                 <div className="sign_in">
