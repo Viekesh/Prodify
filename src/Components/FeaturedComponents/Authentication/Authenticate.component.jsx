@@ -1,14 +1,18 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Auth.style.scss";
 import GoogleSignInButton from "./GAuth";
 import GAuthMob from "./GAuthMob";
 import TopNav from "../Navigation/TopNav.component";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { useState } from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { authInitialise } from "../../../FirebaseConfiguration";
 
 
 
 const Authenticate = () => {
+
+    const userNavigateAfterSignIn = useNavigate();
 
     const [loading, setLoading] = useState(false);
 
@@ -38,21 +42,42 @@ const Authenticate = () => {
         event.preventDefault();
 
         setLoading(true);
-    }
+
+        try {
+            if (email && password) {
+                const userCred = await signInWithEmailAndPassword(
+                    authInitialise,
+                    email,
+                    password
+                );
+
+                setLoading(false);
+
+                if (userCred.user) {
+                    alert("Your Are Successfully Signed In");
+                    console.log(userCred.user);
+                    userNavigateAfterSignIn("/Profile");
+                };
+            };
+        } catch (error) {
+            alert(error.message);
+            console.log(error.message);
+        }
+    };
 
     return (
         <>
             <TopNav />
             <section className="authenticate">
 
-                <div className="sign_in">
-                    <form>
+                <div className="form_fields">
+                    <form onSubmit={submitFormData}>
                         <div className="form_elements y_axis_center">
                             <input
-                                type="text"
-                                id="firstName"
+                                type="email"
+                                id="email"
                                 value={email}
-                                name="firstName"
+                                name="email"
 
                                 className="input_field"
                                 placeholder="Enter Firstname"
@@ -84,16 +109,23 @@ const Authenticate = () => {
                                     />
                             }
                         </div>
+
+                        <button type="submit" className="form_sub_btn">Sign In</button>
                     </form>
+
+                    <h3>
+                        not register yet!
+                        <span> </span>
+                        <NavLink to="/Register">click here</NavLink>
+                        <br />
+                        <br />
+                        sign in with other methods
+                    </h3>
+
+                    <GoogleSignInButton />
+                    <GAuthMob />
                 </div>
 
-                <h3>
-                    not register yet!
-                    <NavLink to="/Register">click here</NavLink>
-                </h3>
-
-                <GoogleSignInButton />
-                <GAuthMob />
             </section>
         </>
     );
