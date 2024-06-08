@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../../../../FirebaseConfiguration";
-
+import { authInitialise } from "../../../../FirebaseConfiguration";
 
 
 
@@ -35,9 +34,9 @@ const CheckAuthStatus = () => {
     useEffect(() => {
 
         // Get auth instance once
-        const authInitialise = auth;
+        const auth = authInitialise;
 
-        const unsubscribe = onAuthStateChanged(authInitialise, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             // Concise check for user existence
             setIsLoggedIn(!!user);
             setCheckingStatus(false);

@@ -22,10 +22,13 @@ const defaultFormFields = {
 
 const Register = () => {
 
+    // Creates a state variable named formFields that holds the current user input for each registration field.
     const [formFields, setFormFields] = useState(defaultFormFields);
 
+    // Destructuring the formFields object to access individual fields (firstName, lastName, etc.)
     const { firstName, lastName, phoneNum, email, password, confirmPass } = formFields;
 
+    // showPassword and showConfirmPassword to control the visibility of passwords when the user types.
     const [showPassword, setShowPassword] = useState(false);
 
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -38,11 +41,13 @@ const Register = () => {
         setShowConfirmPassword((prevState) => !prevState);
     };
 
-    const userNavigateAfterSignUp = useNavigate();
+    // const userNavigateAfterSignUp = useNavigate();
 
+    // Updates the formFields state with the user's input whenever they change any form field.
     const handleFormData = (event) => {
         console.log(event.target.value);
 
+        // It uses the event object to access the target field's ID and value.
         setFormFields((prevState) => ({
             ...prevState,
 
@@ -54,16 +59,22 @@ const Register = () => {
 
 
 
+    // "submitFormData" handles form submission when the "Register" button is clicked.
     const submitFormData = async (event) => {
         event.preventDefault();
 
+        // Creates a createdAt timestamp for the user record.
         const createdAt = new Date();
 
         try {
+
+            // Validates password match.
             if (password !== confirmPass) {
                 return alert("Password Not Matched");
             };
 
+            // Checks if all fields are filled and uses "createUserWithEmailAndPassword"
+            // to create a new user with email and password.
             if (firstName && lastName && email && phoneNum && password && confirmPass) {
                 const userCredential = await createUserWithEmailAndPassword(
                     authInitialise,
@@ -71,6 +82,7 @@ const Register = () => {
                     password,
                 );
 
+                // Updates the user's profile with their full name using updateProfile
                 await updateProfile(authInitialise.currentUser, {
                     displayName: `${firstName} ${lastName}`
                 });
@@ -83,13 +95,16 @@ const Register = () => {
 
                 // delete formDataCopy.confirmPass;
 
+                // Creates a new Firestore document for the user in the "Prodify Users" collection with their 
+                // form data and the timestamp. Optionally removes password and confirm password fields before 
+                // saving.
                 await setDoc(doc(database, "Prodify Users", user.uid), {
                     ...formDataCopy,
                 });
 
                 alert("You Have Successfully Registered!");
 
-                userNavigateAfterSignUp("/Profile");
+                // userNavigateAfterSignUp("/Profile");
 
             } else {
                 return alert("All fields are mandatory");
@@ -97,6 +112,8 @@ const Register = () => {
 
         } catch (error) {
 
+            // Handles potential errors during user creation, such as weak password, invalid email, or email
+            // already in use and Displays an alert message based on the success or failure of the registration.
             if (error.message === "Firebase: Password should be at least 6 characters (auth/weak-password).") {
                 alert("Password should be atleast 6 characters.");
             };
@@ -241,3 +258,10 @@ const Register = () => {
 
 
 export default Register;
+
+
+
+// This component provides a registration form for users to create new accounts with email and password. It
+// validates user input, interacts with Firebase Authentication and Firestore for user creation and data storage,
+// and handles potential errors during the registration process.It also offers the option to integrate Google
+// Sign -in for additional sign - up methods.
