@@ -47,7 +47,7 @@ const TopNav = () => {
                                 return (
                                     <>
                                         <div className="nav_link_options" key={data.id}>
-                                            <NavLink to={data.navlink} key={data.id} onClick={handleOverlayClick}>{data.name}</NavLink>
+                                            <NavLink to={data.navlink} onClick={handleOverlayClick}>{data.name}</NavLink>
                                         </div>
                                     </>
                                 )

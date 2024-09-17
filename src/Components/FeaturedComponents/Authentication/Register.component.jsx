@@ -20,6 +20,8 @@ const defaultFormFields = {
     confirmPass: "",
 };
 
+
+
 const Register = () => {
 
     // Creates a state variable named formFields that holds the current user input for each registration field.
@@ -41,7 +43,7 @@ const Register = () => {
         setShowConfirmPassword((prevState) => !prevState);
     };
 
-    // const userNavigateAfterSignUp = useNavigate();
+    const userNavigateAfterSignUp = useNavigate();
 
     // Updates the formFields state with the user's input whenever they change any form field.
     const handleFormData = (event) => {
@@ -104,7 +106,7 @@ const Register = () => {
 
                 alert("You Have Successfully Registered!");
 
-                // userNavigateAfterSignUp("/Profile");
+                userNavigateAfterSignUp("/Authenticate");
 
             } else {
                 return alert("All fields are mandatory");
@@ -263,5 +265,5 @@ export default Register;
 
 // This component provides a registration form for users to create new accounts with email and password. It
 // validates user input, interacts with Firebase Authentication and Firestore for user creation and data storage,
-// and handles potential errors during the registration process.It also offers the option to integrate Google
+// and handles potential errors during the registration process. It also offers the option to integrate Google
 // Sign -in for additional sign - up methods.
